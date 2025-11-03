@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---- Custom global styles for SEWNA ---- */
+html, body {
+  @apply bg-white text-black font-sans;
+  scroll-behavior: smooth;
+}
+
+/* Accent utilities */
+.text-accent {
+  @apply text-[#00b67f];
+}
+
+.bg-accent {
+  @apply bg-[#00b67f];
+}
+
+.hover-accent:hover {
+  @apply text-[#00b67f];
+}
+
+/* Button base styles */
+.btn {
+  @apply px-6 py-3 rounded-full font-medium transition-all duration-300 ease-in-out;
+}
+
+.btn-primary {
+  @apply bg-[#00b67f] text-white hover:bg-[#00a86b];
+}
+
+.btn-outline {
+  @apply border border-[#00b67f] text-[#00b67f] hover:bg-[#00b67f] hover:text-white;
+}
+
+/* Hero animation entry styles */
+.fade-up {
+  @apply opacity-0 translate-y-4;
+}
+
+.fade-up.active {
+  @apply opacity-100 translate-y-0 transition-all duration-700 ease-out;
+}
