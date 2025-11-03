@@ -2,8 +2,10 @@
 
 import { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 
 export default function AnimatedHero() {
+  const router = useRouter();
   const targetRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -19,6 +21,25 @@ export default function AnimatedHero() {
 
   return (
     <div ref={targetRef} className="relative h-screen w-full overflow-hidden">
+      {/* Logo */}
+      <motion.div 
+        className="absolute top-8 left-8 z-30"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        <div className="text-3xl font-bold tracking-tight" style={{
+          fontFamily: 'Inter, system-ui, -apple-system, sans-serif',
+          fontWeight: 800,
+          color: '#00b67f',
+          letterSpacing: '-0.5px',
+          lineHeight: '1.1',
+          textTransform: 'uppercase'
+        }}>
+          <span className="opacity-80">se</span><span className="opacity-100">W</span><span className="opacity-80">na</span><span className="opacity-60">.</span>
+        </div>
+      </motion.div>
+      
       {/* Background Video */}
       <div className="absolute inset-0 z-0">
         <video
@@ -74,59 +95,141 @@ export default function AnimatedHero() {
           From sketch to stitch, we bring your fashion vision to life with precision and care.
         </motion.p>
         <motion.div 
-          className="flex gap-8 mt-6 " 
+          className="flex flex-wrap gap-6 mt-8 max-w-2xl mx-auto" 
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ delay: 0.4, staggerChildren: 0.1 }}
         >
+          {/* Primary Button - Solid */}
           <motion.button
-            className="relative px-11 py-4 text-white text-lg font-medium rounded-full overflow-hidden group"
-            whileHover={{ y: -2, boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }}
-            whileTap={{ scale: 0.98 }}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+            className="relative px-10 py-3.5 text-base font-extrabold overflow-hidden group"
+            style={{
+              borderRadius: '4px',
+              background: 'white',
+              color: '#000000',
+              border: '1px solid #ffffff',
+              transition: 'all 0.3s ease',
+              minWidth: '220px',
+              textTransform: 'uppercase',
+              letterSpacing: '1.5px',
+              fontSize: '0.8rem'
+            }}
+            whileHover={{
+              y: -4,
+              x: [0, -2, 2, -1, 1, 0],
+              scale: 1.02,
+              boxShadow: [
+                '0 5px 15px rgba(0,0,0,0.1)',
+                '0 8px 20px rgba(0,0,0,0.15)',
+                '0 5px 15px rgba(0,0,0,0.1)'
+              ],
+              transition: {
+                duration: 0.6,
+                x: {
+                  repeat: Infinity,
+                  duration: 0.2,
+                  repeatType: 'reverse'
+                },
+                boxShadow: {
+                  duration: 1.5,
+                  repeat: Infinity,
+                  repeatType: 'reverse'
+                }
+              }
+            }}
+            whileTap={{ 
+              scale: 0.97,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
+            }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ 
+              type: 'spring', 
+              stiffness: 400, 
+              damping: 25,
+              delay: 0.1
+            }}
           >
-            <span className="relative z-10 flex items-center">
-              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-              </svg>
+            <span className="relative z-10 flex items-center justify-center">
               I'm a Designer
             </span>
-            <motion.span 
-              className="absolute inset-0 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full"
-              initial={{ opacity: 0.8 }}
-              whileHover={{ opacity: 1, scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-            />
           </motion.button>
 
+          {/* Secondary Button - Outlined */}
           <motion.button
-            className="relative px-10 py-4 text-white text-lg font-medium rounded-sm overflow-hidden group"
-            whileHover={{ y: -2, boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }}
-            whileTap={{ scale: 0.98 }}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 20, delay: 0.1 }}
+            onClick={() => router.push('/need-a-designer')}
+            className="relative px-10 py-3.5 text-base font-extrabold overflow-hidden group cursor-pointer"
+            style={{
+              borderRadius: '4px',
+              background: 'transparent',
+              color: 'white',
+              border: '1px solid white',
+              borderColor: 'white',
+              transition: 'all 0.3s ease',
+              minWidth: '220px',
+              textTransform: 'uppercase',
+              letterSpacing: '1.5px',
+              fontSize: '0.8rem',
+              position: 'relative',
+              overflow: 'hidden'
+            }}
+            whileHover={{
+              y: -4,
+              x: [0, -2, 2, -1, 1, 0],
+              scale: 1.02,
+              color: '#000000',
+              backgroundColor: 'white',
+              borderColor: '#ffffff',
+              boxShadow: [
+                '0 5px 15px rgba(0,0,0,0.1)',
+                '0 8px 25px rgba(0,0,0,0.2)',
+                '0 5px 15px rgba(0,0,0,0.1)'
+              ],
+              transition: {
+                duration: 0.6,
+                x: {
+                  repeat: Infinity,
+                  duration: 0.1,
+                  repeatType: 'reverse'
+                },
+                boxShadow: {
+                  duration: 1.5,
+                  repeat: Infinity,
+                  repeatType: 'reverse'
+                },
+                backgroundColor: {
+                  duration: 0.3
+                },
+                color: {
+                  duration: 0.3
+                },
+                borderColor: {
+                  duration: 0.3
+                }
+              }
+            }}
+            whileTap={{ 
+              scale: 0.97,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
+            }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ 
+              type: 'spring', 
+              stiffness: 400, 
+              damping: 25,
+              delay: 0.1
+            }}
           >
-            <span className="relative z-10 flex items-center">
-              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
+            <span className="relative z-10 flex items-center justify-center">
               I Need a Designer
             </span>
-            <motion.span 
-              className="absolute inset-0 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full"
-              initial={{ opacity: 0.8 }}
-              whileHover={{ opacity: 1, scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-            />
           </motion.button>
         </motion.div>
       </motion.div>
 
       {/* Scroll indicator */}
-      <motion.div 
+      {/* <motion.div 
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
         initial={{ opacity: 0, y: 20 }}
         animate={{ 
@@ -146,7 +249,7 @@ export default function AnimatedHero() {
             transition={{ duration: 1.5, repeat: Infinity }}
           />
         </div>
-      </motion.div>
+      </motion.div> */}
     </div>
   );
 }

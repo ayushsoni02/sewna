@@ -13,11 +13,11 @@ export default function Home() {
   return (
     <main className="font-sans">
       <AnimatedHero />
-      <div className="min-h-screen">
+      {/* <div className="min-h-screen">
         <ConnectionAnimation />
         <Showcase />
         <Footer />
-      </div>
+      </div> */}
     </main>
   );
 }
