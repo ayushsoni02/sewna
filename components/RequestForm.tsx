@@ -78,34 +78,18 @@ export default function RequestForm({ onSubmit }: RequestFormProps) {
     };
 
     return (
-        <div className="relative min-h-screen overflow-hidden">
-            {/* Background Images */}
-            <div className="fixed inset-0 -z-10">
-                <div className="absolute inset-0 flex">
-                    <div className="w-1/2 h-full">
-                        <img
-                            src="/images/fashion-1.jpg"
-                            alt="Fashion 1"
-                            className="w-full h-full object-cover"
-                            style={{ minHeight: '100vh' }}
-                        />
-                    </div>
-                    <div className="w-1/2 h-full">
-                        <img
-                            src="/images/fashion-2.jpg"
-                            alt="Fashion 2"
-                            className="w-full h-full object-cover"
-                            style={{ minHeight: '100vh' }}
-                        />
-                    </div>
-                </div>
-                <div className="absolute inset-0 bg-black/20" />
-            </div>
-
-            {/* Form Container */}
-            <div className="relative min-h-screen w-full flex items-center justify-center p-4">
-                <motion.div
-                    className="backdrop-blur-sm bg-white/80 shadow-2xl rounded-2xl p-6 sm:p-8 lg:p-10 w-full max-w-4xl mx-4"
+        <div className="min-h-screen w-full flex items-center justify-center p-4" style={{
+            background: `
+                linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),
+                url('/images/fashion-1.jpg') left/50% 100% no-repeat,
+                url('/images/fashion-2.jpg') right/50% 100% no-repeat
+            `,
+            backgroundAttachment: 'fixed',
+            backgroundSize: 'cover',
+            minHeight: '100vh'
+        }}>
+            <motion.div
+                className="backdrop-blur-sm bg-white/80 shadow-2xl rounded-2xl p-6 sm:p-8 lg:p-10 w-full max-w-4xl mx-4"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4 }}
@@ -270,6 +254,5 @@ export default function RequestForm({ onSubmit }: RequestFormProps) {
                     </form>
                 </motion.div>
             </div>
-        </div>
     );
 }
